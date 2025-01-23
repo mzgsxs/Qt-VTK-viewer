@@ -1,24 +1,34 @@
-# Qt-VTK-viewer
-A CMake/C++ project for embedding a VTK 3D view in a Qt window.
+# Simple VTK 3d viewer
+A simple VTK 3D viewer with Qt framework.
 
-![Qt VTK Viewer on Windows](doc/screenshot.png)
 
-## Prerequisites
-- Qt 5.x downloaded.
-- VTK 9.x source downloaded & compiled. See [Build-VTK.md](doc/Build-VTK.md) for a guide to compile VTK.
+## Installation
+Only provide macOS setup, but it should compile in windows easily.
+1. Install vtk, now comes with default Qt integration
+```sh
+brew install vtk
+```
 
-## Usage
-1. Clone or download this repository.
-2. Open CMakeLists.txt in Qt Creator.
-3. Configure project.
-	1. Set build directory.
-	2. Specify VTK_DIR.
+2. Qt installation via brew or from official [website](https://www.qt.io/download-dev) 
+```sh
+brew install qt
+```
+
+3. clone this project
+```
+git clone ...
+```
+
 4. Build project.
+```
+cmake -S . -B build
+cmake --build build
+./build/MM804A1
+```
 
-Done. Happy coding :)
 
 ## License
-This project is licensed under the Apache License 2.0 - see the [LICENSE](LICENSE) file for details.
+Apache License 2.0
 
 ## Acknowledgments
-- Icons from [icons8.com](https://icons8.com/)
+Based on this [project](https://github.com/martijnkoopman/Qt-VTK-viewer).
