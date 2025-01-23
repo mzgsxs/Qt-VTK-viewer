@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Qt VTK Viewer</string>
+   <string>VTK 3D Viewer</string>
   </property>
   <widget class="QWidget" name="centralwidget">
    <layout class="QGridLayout" name="gridLayout">
@@ -41,7 +41,7 @@
      <x>0</x>
      <y>0</y>
      <width>800</width>
-     <height>21</height>
+     <height>24</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">
@@ -74,6 +74,7 @@
    </attribute>
    <addaction name="actionOpenFile"/>
    <addaction name="actionZoomToExtent"/>
+   <addaction name="actionExportScreenShot"/>
   </widget>
   <action name="actionOpenFile">
    <property name="icon">
@@ -121,6 +122,21 @@
    </property>
    <property name="text">
     <string>About</string>
+   </property>
+  </action>
+  <action name="actionExportScreenShot">
+   <property name="icon">
+    <iconset resource="resources.qrc">
+     <normaloff>:/icons/screen_shot.png</normaloff>:/icons/screen_shot.png</iconset>
+   </property>
+   <property name="text">
+    <string>ExportScreenShot</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+S</string>
+   </property>
+   <property name="menuRole">
+    <enum>QAction::MenuRole::TextHeuristicRole</enum>
    </property>
   </action>
  </widget>
@@ -202,9 +218,26 @@
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>actionExportScreenShot</sender>
+   <signal>triggered()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>showSaveFileDialog()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>399</x>
+     <y>299</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
   <slot>showOpenFileDialog()</slot>
   <slot>showAboutDialog()</slot>
+  <slot>showSaveFileDialog()</slot>
  </slots>
 </ui>

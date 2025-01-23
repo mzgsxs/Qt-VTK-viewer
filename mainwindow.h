@@ -15,11 +15,13 @@ public:
     ~MainWindow();
 
 public slots:
+    //! Show the 'Save screenshot...' dialog
+    void showSaveFileDialog();
     //! Show the 'About this application' dialog
     void showAboutDialog();
-
     //! Show the 'Open file...' dialog
     void showOpenFileDialog();
+
 
 protected:
     //! Open a file

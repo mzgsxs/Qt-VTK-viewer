@@ -3,8 +3,12 @@
 
 #include <QVTKOpenGLNativeWidget.h>
 #include <vtkDataSet.h>
+#include <vtkAlgorithmOutput.h>
 #include <vtkRenderer.h>
 #include <vtkSmartPointer.h>
+
+
+#include <vtkPolyDataNormals.h>
 
 class SceneWidget : public QVTKOpenGLNativeWidget {
     Q_OBJECT
@@ -14,8 +18,9 @@ public:
     //! Add a data set to the scene
     /*!
     \param[in] dataSet The data set to add
-  */
-    void addDataSet(vtkSmartPointer<vtkDataSet> dataSet);
+    */
+    void addDataSet(vtkSmartPointer<vtkDataSet>);
+    bool exportSceneToJPG(std::string const &);
 
     //! Remove the data set from the scene
     void removeDataSet();
@@ -25,7 +30,17 @@ public slots:
     void zoomToExtent();
 
 private:
-    vtkSmartPointer<vtkRenderer> m_renderer;
+    // Data holder
+    vtkSmartPointer<vtkDataSet> currentDataSet;
+    vtkSmartPointer<vtkPolyData> currentNormals;
+    // Renderers
+    vtkSmartPointer<vtkRenderer> createRenderer(vtkSmartPointer<vtkCamera>, const std::array<double, 4> &);
+    void initRenderer(vtkSmartPointer<vtkRenderer>, std::string const & displayMode = "");
+    // Viewports
+    vtkSmartPointer<vtkRenderer> topLeftRenderer;
+    vtkSmartPointer<vtkRenderer> topRightRenderer;
+    vtkSmartPointer<vtkRenderer> bottomLeftRenderer;
+    vtkSmartPointer<vtkRenderer> bottomRightRenderer;
 };
 
 #endif // SCENEWIDGET_H

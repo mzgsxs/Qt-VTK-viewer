@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.8)
 
-project(QtVtkViewer)
+project(MM804A1)
 
 set(CMAKE_CONFIGURATION_TYPES "Debug;Release")
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
@@ -12,10 +12,10 @@ file (GLOB Resources *.qrc)
 file (GLOB UIs *.ui)
 
 # Find package Qt
-find_package(Qt5Core REQUIRED)
-find_package(Qt5Gui REQUIRED)
-find_package(Qt5Widgets REQUIRED)
-find_package(Qt5OpenGL REQUIRED)
+find_package(Qt6Core REQUIRED)
+find_package(Qt6Gui REQUIRED)
+find_package(Qt6Widgets REQUIRED)
+find_package(Qt6OpenGL REQUIRED)
 
 # Use Qt
 set(CMAKE_AUTOMOC ON)
@@ -28,13 +28,24 @@ find_package(VTK
     REQUIRED
     COMPONENTS
         GUISupportQt
-        IOLegacy)
+        IOLegacy
+        IOGeometry
+        IOPLY
+        FiltersCore
+        FiltersGeometry
+    )
 
 # Build executable
-add_executable(QtVtkViewer WIN32 ${Sources} ${Headers} ${Resources} ${UIs})
+add_executable(MM804A1 ${Sources} ${Headers} ${Resources} ${UIs})
 
-target_link_libraries(QtVtkViewer PRIVATE Qt5::Widgets Qt5::OpenGL VTK::GUISupportQt VTK::IOLegacy)
+target_link_libraries(MM804A1
+    PRIVATE
+    Qt6::Widgets
+    Qt6::OpenGL
+    ${VTK_LIBRARIES}
+)
 
 vtk_module_autoinit(
-    TARGETS QtVtkViewer
-    MODULES VTK::GUISupportQt VTK::IOLegacy)
+    TARGETS MM804A1
+    MODULES ${VTK_LIBRARIES}
+)
